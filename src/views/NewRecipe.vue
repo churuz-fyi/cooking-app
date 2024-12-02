@@ -70,6 +70,7 @@
                     </select>
                 </div>
             </div>
+            <button>Create Recipe</button>
         </form>
     </div>
 </template>
