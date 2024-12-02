@@ -10,17 +10,17 @@
     })();
     
     const formData = ref({
-        title: 'Lasagna',
-        description: 'A description',
-        userId: 1,
+        title: '',
+        description: '',
+        userId: '',
         created: currentDateSQLFormat,
-        prepTime: 10,
-        cookTime: 10,
-        recyield: 4,
-        season: 1,
-        timeofmeal: 1,
-        mealType: 1,
-        countryOfOrigin: 1
+        prepTime: '',
+        cookTime: '',
+        recyield: '',
+        season: '',
+        timeofmeal: '',
+        mealType: '',
+        countryOfOrigin: ''
     });
 
     const message = ref('');
