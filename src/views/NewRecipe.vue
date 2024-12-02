@@ -6,14 +6,16 @@
     <div class="flex flex-col gap-2 bg-white p-6">
         <h1 class="text-4xl">New Recipe</h1>
         <form class="flex flex-col gap-2"> <!--form for creating a new recipe-->
-            <input class="border b-2 p-2 text-2xl rounded-full w-full" id="newRecipeTitleInput" type="text" placeholder="Recipe title..."/>
-            <input class="border b-2 p-2 text-l rounded-full w-full" id="newRecipeDescriptionInput" type="text" placeholder="An interesting description"/>
-            <input class="border b-2 p-2 text-l rounded-full" id="userIdInput" type="text" placeholder="Your name..."/>
+            <input class="border b-2 p-2 text-2xl rounded-full w-full" id="titleInput" type="text" placeholder="Recipe title..."/>
+            <label for="descriptionInput">Description:</label>
+            <input class="border b-2 p-2 text-1 w-full h-40" id="newRecipeDescriptionInput" type="text"/>
             
             <!--cook times-->
-            <div>
+            <div class="flex gap-2">
+                <input class="border b-2 p-2 text-l rounded-full" id="userIdInput" type="text" placeholder="Your name..."/>
                 <input class="border b-2 p-1 text-1 rounded-full" id="prepTimeInput" type="text" placeholder="Prep time..."/>
                 <input class="border b-2 p-1 text-1 rounded-full" id="cookTimeInput" type="text" placeholder="Cook Time..."/>
+                <input class="border b-2 p-1 text-1 rounded-full" id="tieldInput" type="text" placeholder="Yield amount..."/>
             </div>
 
             <!--tags-->
