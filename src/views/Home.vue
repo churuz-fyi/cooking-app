@@ -1,13 +1,76 @@
 <script setup>
-import Banner from "../components/Banner.vue";
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import MiniRecipe from '../components/MiniRecipe.vue';
 
-import { ref } from "vue";
+// Reactive state variables
+const cards = ref([]);
+const limit = 10;
+const offset = ref(0);
 
-const userFirstName = ref("John Doe");
+// Fetch cards from API
+const fetchCards = async () => {
+    try {
+        const response = await axios.get('http://127.0.0.1:5000/get_cards', {
+            params: { limit, offset: offset.value },
+        });
+        cards.value.push(...response.data);
+        offset.value += limit; // Increment offset for next batch
+    } catch (error) {
+        console.error('Error fetching cards:', error);
+    }
+};
+
+// Load more cards on button click
+const loadMore = () => {
+    fetchCards();
+};
+
+// Fetch initial cards when the component is mounted
+onMounted(() => {
+    fetchCards();
+});
 </script>
+
 <template>
-    <Banner>
-        <span>{{ userFirstName }}</span>
-    </Banner>
-    <h1>HOME</h1>
+    <div>
+        <div class="cards-grid">
+            <MiniRecipe
+              v-for="card in cards"
+              :key="card.id"
+              :title="card.title"
+              :userId="card.userId"
+              :timetoeat="card.timetoeat"
+              :mealType="card.mealType"
+              :season="card.season"
+              :prepTime="card.prepTime"
+              :cookTime="card.cookTime"
+            />
+        </div>
+        <button @click="loadMore" class="load-more">Load More</button>
+    </div>
 </template>
+
+  
+  <style scoped>
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  
+  .load-more {
+    margin-top: 16px;
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .load-more:hover {
+    background-color: #0056b3;
+  }
+  </style>
+  
