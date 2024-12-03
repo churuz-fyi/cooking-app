@@ -12,16 +12,16 @@ defineProps({
 
 <template>
     <!--Box for carousel recipe view-->
-    <div class = "bg-amber-100 h-48 w-52 p-3 border rounded-lg 
+    <div class = "bg-amber-100 h-48 w-52 p-3 rounded-lg 
     border-2 border-black shadow-2xl my-4 mx-4"> 
         <h1 class = "text-lg text-center font-bold">{{ title }}</h1>
         <div>
             <p class="text-center p-1">{{ userId }}</p>
         </div>
         <div class = "flex flex-row text-xs gap-2 py-0.5"> 
-            <p class = "bg-amber-200 text-center flex-auto border rounded-md border-2 border-black p-0.5">{{timetoeat}}</p>
-            <p class = "bg-amber-200 text-center flex-auto border rounded-md border-2 border-black p-0.5">{{mealType}}</p>
-            <p class = "bg-amber-200 text-center flex-auto border rounded-md border-2 border-black p-0.5">{{season}}</p>
+            <p class = "bg-amber-200 text-center flex-auto rounded-md border-2 border-black p-0.5">{{timetoeat}}</p>
+            <p class = "bg-amber-200 text-center flex-auto rounded-md border-2 border-black p-0.5">{{mealType}}</p>
+            <p class = "bg-amber-200 text-center flex-auto rounded-md border-2 border-black p-0.5">{{season}}</p>
         </div>
         <div class = "flex flex-row flex-initial text-sm py-0.5">
             <img src="../assets/icons8-clock-50.png">
