@@ -5,20 +5,56 @@ import MiniRecipe from '../components/MiniRecipe.vue';
 
 // Reactive state variables
 const cards = ref([]);
-const limit = 10;
+const limit = 20;
 const offset = ref(0);
+const searchQuery = ref("");
+const loading = ref(false);
+const allLoaded = ref(false);
 
 // Fetch cards from API
 const fetchCards = async () => {
+    if (loading.value || searchQuery.value) return;
+    loading.value = true;
+
     try {
         const response = await axios.get('http://127.0.0.1:5000/get_cards', {
             params: { limit, offset: offset.value },
         });
-        cards.value.push(...response.data);
-        offset.value += limit; // Increment offset for next batch
+        if (response.data.length > 0) {
+          cards.value.push(...response.data);
+          offset.value += limit; // Increment offset for next batch
+        } else {
+          allLoaded.value = true;
+        }
     } catch (error) {
         console.error('Error fetching cards:', error);
+    } finally {
+      loading.value = false;
     }
+};
+
+const handleSearch = async () => {
+  if (!searchQuery.value.trim()) {
+    cards.value = [];
+    offset.value = 0;
+    allLoaded.value = false;
+    await fetchCards();
+    return;
+  }
+
+  loading.value = true;
+
+  try {
+    const response = await axios.get('http://127.0.0.1:5000/get_cards_search', {
+      params: {search_value: searchQuery.value, offset: 0, limit: limit},
+    });
+    cards.value = response.data;
+    allLoaded.value = response.data.length < limit;
+  } catch (error) {
+    console.error("Error searching cards:", error);
+  } finally {
+    loading.value = false;
+  }
 };
 
 // Load more cards on button click
@@ -33,11 +69,20 @@ onMounted(() => {
 </script>
 
 <template>
+    <div class="flex flex-row gap-2 m-2">
+      <input 
+        v-model="searchQuery"
+        placeholder="Recipe Title or Username..."
+        type="text"
+        @input="handleSearch"
+        class="rounded-full p-2 w-full"
+      />
+      <button @click="handleSearch" class="p-2 flex flex-row border-2 border-black rounded-full">
+        <img class="h-6" src="../assets/icons8-search.svg" alt="search icon"/>
+        <p>Search</p>
+      </button>
+    </div>
     <div>
-        <div class="flex flex-row">
-          <input class="m-2 p-2 rounded-full" placeholder="Search..." type="text"/>
-          <button><img src="../assets/icons8-search.svg" alt="search button"/></button>
-        </div>
         <div class="cards-grid">
             <MiniRecipe
               v-for="card in cards"
@@ -61,6 +106,7 @@ onMounted(() => {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
+    padding: 0% 1%;
   }
   
   .load-more {
