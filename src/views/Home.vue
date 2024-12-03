@@ -34,6 +34,10 @@ onMounted(() => {
 
 <template>
     <div>
+        <div class="flex flex-row">
+          <input class="m-2 p-2 rounded-full" placeholder="Search..." type="text"/>
+          <button><img src="../assets/icons8-search.svg" alt="search button"/></button>
+        </div>
         <div class="cards-grid">
             <MiniRecipe
               v-for="card in cards"
