@@ -10,9 +10,9 @@ const currentDateSQLFormat = (() => {
 })();
 
 const formData = ref({
-    username: 'josh123',
-    firstName: 'Joshua',
-    lastName: 'Smith',
+    username: '',
+    firstName: '',
+    lastName: '',
     joinDate: currentDateSQLFormat,
 });
 
