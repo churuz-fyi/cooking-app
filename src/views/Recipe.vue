@@ -1,5 +1,5 @@
 <template>
-    <div class = "border border-2 rounded-md border-black bg-amber-100 divide-y divide-solid divide-black">
+    <div class = "border-2 rounded-md border-black bg-amber-100 divide-y divide-solid divide-black">
         <p class="text-center text-xl font-bold">Recipe</p>
         <div class = "flex flex-col p-4 divide-y divide-solid divide-black">
             <p class="pb-1">Description: </p>
