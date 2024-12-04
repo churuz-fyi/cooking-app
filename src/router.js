@@ -20,6 +20,12 @@ const routes = [
         name: 'New User',
         component: () => import('./views/NewUser.vue'),
     },
+    {
+        path: '/recipe/:id',
+        name: 'Recipe',
+        component: () => import('./views/Recipe.vue'),
+        props: true,
+    },
 ];
 
 const router = createRouter({
