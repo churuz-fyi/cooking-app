@@ -12,8 +12,8 @@ const goToRecipe = (id) => {
     console.log('goToRecipe function triggered');
     console.log(id);
     router.push({ name: 'Recipe', params: {id: id} });
-
 };
+
 </script>
 
 <template>

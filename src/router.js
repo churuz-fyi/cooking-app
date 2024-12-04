@@ -11,9 +11,10 @@ const routes = [
         component: () => import('./views/NewRecipe.vue'),
     },
     {
-        path: '/user',
+        path: '/user/:user_id',
         name: 'User Page',
         component: () => import('./views/User.vue'),
+        props: true,
     },
     {
         path: '/newUser',
