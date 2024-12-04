@@ -65,6 +65,8 @@ const loadMore = () => {
 // Fetch initial cards when the component is mounted
 onMounted(() => {
     fetchCards();
+    console.log('Cards:', cards.value); // Debugging: Log cards array
+
 });
 </script>
 
@@ -87,13 +89,7 @@ onMounted(() => {
             <MiniRecipe
               v-for="card in cards"
               :key="card.id"
-              :title="card.title"
-              :userId="card.userId"
-              :timetoeat="card.timetoeat"
-              :mealType="card.mealType"
-              :season="card.season"
-              :prepTime="card.prepTime"
-              :cookTime="card.cookTime"
+              :recipe="card"
             />
         </div>
         <button @click="loadMore" class="load-more">Load More</button>
