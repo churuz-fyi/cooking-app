@@ -27,6 +27,17 @@ const routes = [
         component: () => import('./views/Recipe.vue'),
         props: true,
     },
+    {
+        path: '/newCookbook',
+        name: 'New Cookbook',
+        component: () => import('./views/NewCookbook.vue'),
+    },
+    {
+        path: '/cookbook/:cookbook_id',
+        name: 'Cookbook',
+        component: () => import('./views/Cookbook.vue'),
+        props: true,
+    },
 ];
 
 const router = createRouter({
