@@ -2,11 +2,15 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import MiniRecipe from '../components/MiniRecipe.vue';
+import MiniCookbook from '../components/MiniCookbook.vue';
 
 // Reactive state variables
 const cards = ref([]);
+const cookbooks = ref([]);
 const limit = 20;
+const cookbook_limit = 6;
 const offset = ref(0);
+const cookbook_offset = ref(0);
 const searchQuery = ref("");
 const loading = ref(false);
 const allLoaded = ref(false);
@@ -31,6 +35,17 @@ const fetchCards = async () => {
     } finally {
       loading.value = false;
     }
+};
+const fetchCookbooks = async () => {
+  try {
+    const response = await axios.get('http://localhost:5000/get_cookbooks', {
+      params: { cookbook_limit, offset: cookbook_offset.value },
+    });
+    cookbooks.value.push(...response.data);
+    cookbook_offset.value += cookbook_limit;
+  } catch (error) {
+    console.error('Error fetching cookbooks:', error);
+  }
 };
 
 const handleSearch = async () => {
@@ -58,15 +73,20 @@ const handleSearch = async () => {
 };
 
 // Load more cards on button click
-const loadMore = () => {
+const loadMoreCards = () => {
     fetchCards();
 };
+
+const loadMoreCookbooks = () => {
+    fetchCookbooks();
+}
 
 // Fetch initial cards when the component is mounted
 onMounted(() => {
     fetchCards();
     console.log('Cards:', cards.value); // Debugging: Log cards array
-
+    fetchCookbooks();
+    console.log('Cookbooks:', cookbooks.value);
 });
 </script>
 
@@ -84,7 +104,19 @@ onMounted(() => {
         <p>Search</p>
       </button>
     </div>
-    <div>
+    <div class="px-10">
+        <h1 class="font-bold text-xl">Cookbooks</h1>
+        <div class="cards-grid">
+          <MiniCookbook
+            v-for="cookbook in cookbooks"
+            :key="cookbook.id"
+            :cookbook="cookbook"
+          />
+        </div>
+        <button @click="loadMoreCookbooks" class="load-more">Load More</button>
+    </div>
+    <div class="px-10">
+        <h1 class="font-bold text-xl">Recipes</h1>
         <div class="cards-grid">
             <MiniRecipe
               v-for="card in cards"
@@ -92,7 +124,7 @@ onMounted(() => {
               :recipe="card"
             />
         </div>
-        <button @click="loadMore" class="load-more">Load More</button>
+        <button @click="loadMoreCards" class="load-more">Load More</button>
     </div>
 </template>
 
