@@ -10,7 +10,7 @@ const cookbook = ref([]);
 
 onMounted( async () => {
     try {
-        const response = await axios.get(`http://localhost:5000/get_cookbook/${route.params.cookbook_id}`);
+        const response = await axios.get(`http://10.207.150.10:10000/get_cookbook/${route.params.cookbook_id}`);
         cookbook.value = response.data;
         console.log("Cookbook data:", cookbook.value);
     } catch (error) {
@@ -27,7 +27,7 @@ const goToUser = (user_id) => {
 <template>
     <div v-for="(item, index) in cookbook" :key="index" class = "border-2 rounded-md border-black bg-amber-100 divide-y divide-solid divide-black mx-40">
         <p class="text-center text-xl font-bold">{{ item.title }} # {{ item.id }}</p>
-        <p @click="goToUser(item.userId_id)" class="text-center text-lg">{{ item.userId }}</p>
+        <p @click="goToUser(item.userId_id)" class="text-center text-lg">{{ item.userid }}</p>
         <div class = "flex flex-col p-4 divide-y divide-solid divide-black">
             <p class="pb-1">Description: {{ item.description }}</p>
             <p class="pb-1">Meal Type: {{ item.mealType }}</p>

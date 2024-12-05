@@ -29,7 +29,7 @@
 
     const handleSubmit = async () => {
         try {
-            const apiUrl = "http://localhost:5000/insert";
+            const apiUrl = "http://10.207.150.10:10000/insert";
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {

@@ -9,7 +9,7 @@ const recipe = ref([]);
 
 onMounted( async () => {
     try {
-        const response = await axios.get(`http://localhost:5000/get_recipe/${route.params.id}`);
+        const response = await axios.get(`http://10.207.150.10:10000/get_recipe/${route.params.id}`);
         recipe.value = response.data;
         console.log("User Data:",recipe.value);
     } catch (error) {

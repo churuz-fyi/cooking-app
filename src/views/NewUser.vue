@@ -21,7 +21,7 @@ const showPopup = ref(false);
 
 const handleSubmit = async () => {
     try {
-        const apiUrl = "http://localhost:5000/new_user";
+        const apiUrl = "http://10.207.150.10:10000/new_user";
         const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {

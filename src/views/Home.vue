@@ -21,7 +21,7 @@ const fetchCards = async () => {
     loading.value = true;
 
     try {
-        const response = await axios.get('http://127.0.0.1:5000/get_cards', {
+        const response = await axios.get('http://10.207.150.10:10000/get_cards', {
             params: { limit, offset: offset.value },
         });
         if (response.data.length > 0) {
@@ -38,7 +38,7 @@ const fetchCards = async () => {
 };
 const fetchCookbooks = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/get_cookbooks', {
+    const response = await axios.get('http://10.207.150.10:10000/get_cookbooks', {
       params: { cookbook_limit, offset: cookbook_offset.value },
     });
     cookbooks.value.push(...response.data);
@@ -60,7 +60,7 @@ const handleSearch = async () => {
   loading.value = true;
 
   try {
-    const response = await axios.get('http://127.0.0.1:5000/get_cards_search', {
+    const response = await axios.get('http://10.207.150.10:10000/get_cards_search', {
       params: {search_value: searchQuery.value, offset: 0, limit: limit},
     });
     cards.value = response.data;

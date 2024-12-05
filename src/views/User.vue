@@ -8,7 +8,7 @@ const user_data = ref([]);
 
 onMounted( async () => {
     try {
-        const response = await axios.get(`http://localhost:5000/get_user/${route.params.user_id}`);
+        const response = await axios.get(`http://10.207.150.10:10000/get_user/${route.params.user_id}`);
         user_data.value = response.data;
         console.log("Recipe:",user_data.value);
     } catch (error) {
