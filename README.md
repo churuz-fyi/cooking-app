@@ -1,6 +1,7 @@
 # Cooking App
 
-Project for Intro to Database course
+Project for Intro to Database course. The goal was to create a front end and transactional server to utilize a database structure. Project isn't being worked on and the server is on [churuz-fyi/cooking-app-api](https://github.com/churuz-fyi/cooking-app-api/).
+
 ### Built With
 - **Vite**          : Development and Building  | [Docs](https://vitejs.dev/)
 - **Vue**           : Front-end Framework       | [Docs](https://vuejs.org/)
